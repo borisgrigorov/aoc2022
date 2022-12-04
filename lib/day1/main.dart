@@ -2,8 +2,16 @@ import 'dart:io';
 
 void main(List<String> args) {
   List<int> input = [];
+  input = loadFile('input.txt');
 
-  File file = File('./input.txt');
+  input.sort((a, b) => b.compareTo(a));
+  int totalTopThree = input[0] + input[1] + input[2];
+  print(totalTopThree);
+}
+
+List<int> loadFile(String fileName) {
+  List<int> input = [];
+  File file = File(fileName);
   int i = 0;
   file.readAsLinesSync().forEach((line) {
     if (line.trim().isNotEmpty) {
@@ -13,7 +21,10 @@ void main(List<String> args) {
       i = 0;
     }
   });
+  return input;
+}
+
+int getTopThree(List<int> input) {
   input.sort((a, b) => b.compareTo(a));
-  int totalTopThree = input[0] + input[1] + input[2];
-  print(totalTopThree);
+  return input[0] + input[1] + input[2];
 }
